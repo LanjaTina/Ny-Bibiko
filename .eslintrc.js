@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+// eslint-disable-next-line import/no-extraneous-dependencies
 module.exports = {
   extends: ['airbnb', 'plugin:prettier/recommended', 'prettier/react'],
   env: {
