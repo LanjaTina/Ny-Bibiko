@@ -1,15 +1,29 @@
-import React from 'react';
-import { View, Text, Image } from 'react-native';
+// AnimalDetailsScreen.js
 
-const AnimalDetailsScreen = ({ route }) => {
-  const { animal } = route.params; // Récupérer l'animal des paramètres de navigation
+import React from 'react';
+import { View, Text, Button } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { removeAnimal  } from '../store/reducers/animalSlice';
+
+const AnimalDetailsScreen = ({ route, navigation }) => {
+  const { animal } = route.params;
+  
+  const dispatch = useDispatch();
+  const handleDelete = () => {
+    dispatch(removeAnimal(animal.id));
+    navigation.goBack();
+  };
+  const handleEdit = () => {
+    navigation.navigate('EditAnimalScreen', { animal });
+  };
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Image source={{ uri: animal.image }} style={{ width: 200, height: 200 }} />
-      <Text>Type: {animal.type}</Text>
+    <View>
       <Text>Nom: {animal.name}</Text>
+      <Text>Type: {animal.type}</Text>
       <Text>Couleur: {animal.color}</Text>
+      <Button title="Modifier" onPress={handleEdit} />
+      <Button title="Supprimer" onPress={handleDelete} />
     </View>
   );
 };

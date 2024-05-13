@@ -4,6 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AnimalListScreen from './AnimalListScreen';
 import AnimalDetailsScreen from './AnimalDetailsScreen';
 import FavoriteAnimalsScreen from './FavoriteAnimalsScreen';
+import AddAnimalScreen from './AddAnimalScreen';
+import EditAnimalScreen from './EditAnimalScreen';
 import store from '../store/store';
 import { Text,Button,StyleSheet,View  } from 'react-native';
 const Stack = createStackNavigator();
@@ -21,9 +23,11 @@ export default function Dashboard({ navigation }) {
       <Stack.Screen name="AnimalList" component={AnimalListScreen} options={{ headerShown: false }} />
       <Stack.Screen name="AnimalDetails" component={AnimalDetailsScreen} />
       <Stack.Screen name="FavoriteAnimalsScreen" component={FavoriteAnimalsScreen} />
+      <Stack.Screen name="AddAnimalScreen" component={AddAnimalScreen} />
+      <Stack.Screen name="EditAnimalScreen" component={EditAnimalScreen} />
     </Stack.Navigator>
     <View style={styles.buttonContainer}>
-        <Button title="Ajouter" style={styles.button}/>
+        <Button title="Ajouter" style={styles.button} onPress={() => navigation.navigate('AddAnimalScreen')}/>
         <Button title="Voir Favoris" style={styles.button} onPress={() => navigation.navigate('FavoriteAnimalsScreen')} />
         <Button title="Logout" style={styles.button} onPress={handleLogout} />
       </View>

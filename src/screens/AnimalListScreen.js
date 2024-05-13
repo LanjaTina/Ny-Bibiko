@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, FlatList, TouchableOpacity, Text, Button ,SafeAreaView , StyleSheet, Image} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAnimals, addToFavorites } from '../store/reducers/animalSlice';
+import { selectAnimals, addToFavorites,removeAnimal  } from '../store/reducers/animalSlice';
 import MyButton from '../components/MyButton';
 
 const animals = [
@@ -39,6 +39,7 @@ const AnimalListScreen = ({ navigation }) => {
                   <Text style={styles.type}>{item.type}</Text>
                   <Text style={styles.color}>{item.color}</Text>
                   <MyButton title="O" onPress={() => handleAddToFavorites(item)} />
+                  <MyButton title="details" onPress={() => handleAnimalPress(item)} />
                 </View>
               </View>
             </View>
