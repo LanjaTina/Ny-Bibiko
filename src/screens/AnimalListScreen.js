@@ -5,8 +5,8 @@ import { selectAnimals, addToFavorites,removeAnimal  } from '../store/reducers/a
 import MyButton from '../components/MyButton';
 
 const animals = [
-  { id: 1, type: 'Chat', name: 'Minou', color: 'Noir', image: '../assets/chien.jpg' },
-  { id: 2, type: 'Chien', name: 'Rex', color: 'Marron', image: `require('../assets/logo.png')` },
+  { id: 1, type: 'Chat', name: 'Minou', color: 'Noir', image: require('../assets/chien.jpg') },
+  { id: 2, type: 'Chien', name: 'Rex', color: 'Marron', image: require('../assets/logo.png') },
 ];
 
 const AnimalListScreen = ({ navigation }) => {
@@ -33,7 +33,7 @@ const AnimalListScreen = ({ navigation }) => {
           return (
             <View style={styles.cardBox} key={item.id}>
               <View style={styles.innerContainer}>
-                <Image source={require('../assets/chien.jpg')} style={styles.img} />
+                <Image source={item.image} style={styles.img} />
                 <View style={styles.textContainer}>
                   <Text style={styles.title}>{item.name}</Text>
                   <Text style={styles.type}>{item.type}</Text>
