@@ -1,11 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
-import AnimalListScreen from './AnimalListScreen';
-import AnimalDetailsScreen from './AnimalDetailsScreen';
-import FavoriteAnimalsScreen from './FavoriteAnimalsScreen';
-import AddAnimalScreen from './AddAnimalScreen';
-import EditAnimalScreen from './EditAnimalScreen';
+import AnimalListScreen from './AnimalScreen/AnimalListScreen';
+import AnimalDetailsScreen from './AnimalScreen/AnimalDetailsScreen';
+import FavoriteAnimalsScreen from './AnimalScreen/FavoriteAnimalsScreen';
+import AddAnimalScreen from './AnimalScreen/AddAnimalScreen';
+import EditAnimalScreen from './AnimalScreen/EditAnimalScreen';
 import store from '../store/store';
 import { Text,Button,StyleSheet,View  } from 'react-native';
 const Stack = createStackNavigator();

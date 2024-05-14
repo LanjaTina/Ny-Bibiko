@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, FlatList, TouchableOpacity, Text, Button ,SafeAreaView , StyleSheet, Image} from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAnimals, addToFavorites,removeAnimal  } from '../store/reducers/animalSlice';
-import MyButton from '../components/MyButton';
+import { selectAnimals, addToFavorites,removeAnimal  } from '../../store/reducers/animalSlice';
+import MyButton from '../../components/MyButton';
 
 const animals = [
-  { id: 1, type: 'Chat', name: 'Minou', color: 'Noir', image: require('../assets/chien.jpg') },
-  { id: 2, type: 'Chien', name: 'Rex', color: 'Marron', image: require('../assets/logo.png') },
+  { id: 1, type: 'Chat', name: 'Minou', color: 'Noir', image: require('../../assets/chien.jpg') },
+  { id: 2, type: 'Chien', name: 'Rex', color: 'Marron', image: require('../../assets/logo.png') },
 ];
 
 const AnimalListScreen = ({ navigation }) => {

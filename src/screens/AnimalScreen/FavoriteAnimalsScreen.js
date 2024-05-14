@@ -3,7 +3,7 @@
 import React from 'react';
 import { View, FlatList, Text } from 'react-native';
 import { useSelector } from 'react-redux';
-import { selectFavorites } from '../store/reducers/animalSlice';
+import { selectFavorites } from '../../store/reducers/animalSlice';
 
 const FavoriteAnimalsScreen = () => {
   const favorites = useSelector(selectFavorites);

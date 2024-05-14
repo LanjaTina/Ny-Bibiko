@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { updateAnimal } from '../store/reducers/animalSlice';
+import { updateAnimal } from '../../store/reducers/animalSlice';
 import { useNavigation } from '@react-navigation/native';
 const EditAnimalScreen = ({ route, navigation }) => {
   const { animal } = route.params;

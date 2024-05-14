@@ -3,7 +3,7 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { removeAnimal  } from '../store/reducers/animalSlice';
+import { removeAnimal  } from '../../store/reducers/animalSlice';
 
 const AnimalDetailsScreen = ({ route, navigation }) => {
   const { animal } = route.params;

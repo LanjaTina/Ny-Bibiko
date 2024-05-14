@@ -1,18 +1,13 @@
-// animalSlice.js
-
 import { createSlice } from '@reduxjs/toolkit';
-
-// Données factices pour les animaux
 const initialAnimals = [
   { id: 1, type: 'Chat', name: 'Minou', color: 'Noir', image: 'url_de_l_image' },
   { id: 2, type: 'Chien', name: 'Rex', color: 'Marron', image: 'url_de_l_image' },
-  // Ajoutez plus d'animaux selon vos besoins
 ];
 
 export const animalSlice = createSlice({
   name: 'animals',
   initialState: {
-    list: initialAnimals, // Utilisez les données factices comme état initial
+    list: initialAnimals,
     selectedAnimal: null,
     favorites: [],
   },
