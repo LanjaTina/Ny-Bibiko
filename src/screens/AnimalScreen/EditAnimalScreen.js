@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { updateAnimal } from '../../store/reducers/animalSlice';
 import { useNavigation } from '@react-navigation/native';
 
 const EditAnimalScreen = ({ route }) => {
-  const { animal } = route.params;
+  const { animal, image } = route.params;
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -27,6 +27,7 @@ const EditAnimalScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
+      {image && <Image source={image} style={styles.animalImage} />}
       <TextInput
         style={styles.input}
         value={name}
@@ -68,6 +69,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingHorizontal: 10,
     backgroundColor: 'white',
+  },
+  animalImage: {
+    width: 200,
+    height: 200,
+    resizeMode: 'cover',
+    borderRadius: 10,
+    marginBottom: 20,
   },
 });
 
