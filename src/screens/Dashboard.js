@@ -7,7 +7,7 @@ import FavoriteAnimalsScreen from './AnimalScreen/FavoriteAnimalsScreen';
 import AddAnimalScreen from './AnimalScreen/AddAnimalScreen';
 import EditAnimalScreen from './AnimalScreen/EditAnimalScreen';
 import store from '../store/store';
-import { Text,Button,StyleSheet,View  } from 'react-native';
+import { Text, Button, StyleSheet, View, Image, TouchableOpacity, ImageBackground } from 'react-native';
 const Stack = createStackNavigator();
 
 export default function Dashboard({ navigation }) {
@@ -17,31 +17,81 @@ export default function Dashboard({ navigation }) {
       routes: [{ name: 'StartScreen' }],
     });
   };
+
   return (
     <Provider store={store}>
-    <Stack.Navigator>
-      <Stack.Screen name="AnimalList" component={AnimalListScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="AnimalDetails" component={AnimalDetailsScreen} />
-      <Stack.Screen name="FavoriteAnimalsScreen" component={FavoriteAnimalsScreen} />
-      <Stack.Screen name="AddAnimalScreen" component={AddAnimalScreen} />
-      <Stack.Screen name="EditAnimalScreen" component={EditAnimalScreen} />
-    </Stack.Navigator>
-    <View style={styles.buttonContainer}>
-        <Button title="Ajouter" style={styles.button} onPress={() => navigation.navigate('AddAnimalScreen')}/>
-        <Button title="Voir Favoris" style={styles.button} onPress={() => navigation.navigate('FavoriteAnimalsScreen')} />
-        <Button title="Logout" style={styles.button} onPress={handleLogout} />
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+            containerStyle: {
+              backgroundColor: "#0000FF", // Couleur de l'arrière-plan pour toutes les pages
+            },
+          }}
+        >
+          <Stack.Screen name="AnimalList" component={AnimalListScreen} />
+          <Stack.Screen name="AnimalDetails" component={AnimalDetailsScreen} />
+          <Stack.Screen name="FavoriteAnimalsScreen" component={FavoriteAnimalsScreen} />
+          <Stack.Screen name="AddAnimalScreen" component={AddAnimalScreen} />
+          <Stack.Screen name="EditAnimalScreen" component={EditAnimalScreen} />
+        </Stack.Navigator>
+        
+      <View style={styles.test} >
+        <View style={styles.buttonContainer} >
+          <TouchableOpacity onPress={() => navigation.navigate('AnimalList')} style={styles.logoutButton}>
+            <Image source={require('../../assets/icones/home.png')} style={styles.button} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('AddAnimalScreen')} style={styles.logoutButton}>
+            <Image source={require('../../assets/icones/add.png')} style={styles.button} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('FavoriteAnimalsScreen')} style={styles.logoutButton}>
+            <Image source={require('../../assets/icones/heart.png')} style={styles.button} />
+          </TouchableOpacity>
+        </View>
+        
       </View>
-  </Provider>
+      
+      <View style={styles.logoutButtonContainer}>
+          <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
+            <Image source={require('../../assets/icones/logout.png')} style={styles.logoutIcon} />
+          </TouchableOpacity>
+        </View>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     marginVertical: 20,
+    paddingHorizontal: 20,
+    position: "relative",
+    
   },
-  button:{
-    backgroundColor: '#4A4653',
-  }
+  test:{
+    position: 'absolute',
+    top: 570,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    backdropFilter: 'blur(10px)',
+    borderRadius:20,
+  },
+  button: {
+    width:32,
+    height:32,
+  },
+  logoutButtonContainer: {
+    position: 'absolute',
+    top: 40,
+    right: 20,
+  },
+  logoutButton: {
+    backgroundColor: 'transparent', // Pour rendre le bouton transparent
+  },
+  logoutIcon: {
+    width: 24,
+    height: 24,
+  },
 });

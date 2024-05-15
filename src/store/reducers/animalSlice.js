@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 const initialAnimals = [
-  { id: 1, type: 'Chat', name: 'Minou', color: 'Noir', image: 'url_de_l_image' },
-  { id: 2, type: 'Chien', name: 'Rex', color: 'Marron', image: 'url_de_l_image' },
+  { id: 1, type: 'Chat', name: 'Minou', color: 'Noir', image: require('../../../assets/chien.jpg') },
+  { id: 2, type: 'Chien', name: 'Rex', color: 'Marron', image: require('../../../assets/chien.jpg') },
 ];
 
 export const animalSlice = createSlice({
@@ -18,6 +18,14 @@ export const animalSlice = createSlice({
     removeAnimal: (state, action) => {
       state.list = state.list.filter(animal => animal.id !== action.payload);
     },
+    updateAnimalImage: (state, action) => {
+      const { id, image } = action.payload;
+      const animalToUpdate = state.list.find(animal => animal.id === id);
+      if (animalToUpdate) {
+        animalToUpdate.image = image;
+      }
+    },
+
     updateAnimal: (state, action) => {
       const { id, updatedAnimal } = action.payload;
       const index = state.list.findIndex(animal => animal.id === id);
@@ -25,6 +33,7 @@ export const animalSlice = createSlice({
         state.list[index] = updatedAnimal;
       }
     },
+    
     selectAnimal: (state, action) => {
       state.selectedAnimal = action.payload;
     },
@@ -37,7 +46,7 @@ export const animalSlice = createSlice({
   },
 });
 
-export const { addAnimal, removeAnimal, selectAnimal, addToFavorites, removeFromFavorites,updateAnimal } = animalSlice.actions;
+export const { addAnimal, removeAnimal, selectAnimal, addToFavorites, removeFromFavorites,updateAnimal,updateAnimalImage } = animalSlice.actions;
 
 export const selectAnimals = state => state.animals.list;
 export const selectSelectedAnimal = state => state.animals.selectedAnimal;
