@@ -20,6 +20,7 @@ export default function Dashboard({ navigation }) {
 
   return (
     <Provider store={store}>
+      <View style={styles.container}>
         <Stack.Navigator
           screenOptions={{
             headerShown: false,
@@ -35,52 +36,53 @@ export default function Dashboard({ navigation }) {
           <Stack.Screen name="EditAnimalScreen" component={EditAnimalScreen} />
         </Stack.Navigator>
         
-      <View style={styles.test} >
-        <View style={styles.buttonContainer} >
-          <TouchableOpacity onPress={() => navigation.navigate('AnimalList')} style={styles.logoutButton}>
-            <Image source={require('../../assets/icones/home.png')} style={styles.button} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('AddAnimalScreen')} style={styles.logoutButton}>
-            <Image source={require('../../assets/icones/add.png')} style={styles.button} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('FavoriteAnimalsScreen')} style={styles.logoutButton}>
-            <Image source={require('../../assets/icones/heart.png')} style={styles.button} />
-          </TouchableOpacity>
+        <View style={styles.test}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate('AnimalList')} style={styles.logoutButton}>
+              <Image source={require('../../assets/icones/home.png')} style={styles.button} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('AddAnimalScreen')} style={styles.logoutButton}>
+              <Image source={require('../../assets/icones/add.png')} style={styles.button} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('FavoriteAnimalsScreen')} style={styles.logoutButton}>
+              <Image source={require('../../assets/icones/heart.png')} style={styles.button} />
+            </TouchableOpacity>
+          </View>
         </View>
         
-      </View>
-      
-      <View style={styles.logoutButtonContainer}>
+        <View style={styles.logoutButtonContainer}>
           <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
             <Image source={require('../../assets/icones/logout.png')} style={styles.logoutIcon} />
           </TouchableOpacity>
         </View>
+      </View>
     </Provider>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: 20,
     paddingHorizontal: 20,
     position: "relative",
-    
   },
-  test:{
+  test: {
     position: 'absolute',
-    top: 570,
+    bottom: 0,
     left: 0,
     right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
-    backdropFilter: 'blur(10px)',
-    borderRadius:20,
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    backdropFilter: 'blur(20px)',
+    borderRadius: 20,
   },
   button: {
-    width:32,
-    height:32,
+    width: 32,
+    height: 32,
   },
   logoutButtonContainer: {
     position: 'absolute',

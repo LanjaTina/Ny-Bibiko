@@ -3,7 +3,8 @@ import { View, FlatList, Text, SafeAreaView, StyleSheet, ImageBackground, Image 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAnimals, addToFavorites } from '../../store/reducers/animalSlice';
 import MyButton from '../../components/MyButton';
-
+import TextInput from '../../components/TextInput';/* 
+import {MagnifyingGlassIcon} from '@expo/vector-icons'; */
 const AnimalListScreen = ({ navigation }) => {
   const animals = useSelector(selectAnimals);
   const dispatch = useDispatch();
@@ -19,8 +20,9 @@ const AnimalListScreen = ({ navigation }) => {
   return (
     <ImageBackground blurRadius={20} source={require("../../../assets/background.jpg")} style={styles.backgroundImage}>
       <SafeAreaView />
-      <View>
-        <Text> Hello </Text>
+      <View className="flex-row flex-1 p-4 bg-white rounded-2xl">{/* 
+        <MagnifyingGlassIcon stroke={40} color="gray"/> */}
+        <TextInput value="Search" className="ml-2"/>
       </View>
       <View style={styles.container}>
         <FlatList
@@ -48,6 +50,7 @@ const AnimalListScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position:"relative",
     paddingHorizontal: 10,
   },
   cardBox: {
