@@ -35,7 +35,7 @@ const AddAnimalScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.form}>
         <TouchableOpacity style={styles.imagePicker} onPress={pickImage}>
-          <Ionicons name="add-circle-outline" size={40} color="black" />
+          <Ionicons name="add-circle-outline" size={60} color="black" />
         </TouchableOpacity>
         {image && <Image source={{ uri: image }} style={styles.image} />}
         <TextInput
