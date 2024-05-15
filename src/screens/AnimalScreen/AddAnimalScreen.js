@@ -56,8 +56,6 @@ const AddAnimalScreen = ({ navigation }) => {
           value={color}
           onChangeText={(text) => setColor(text)}
         />
-      </View>
-      <View style={styles.buttonContainer}>
         <Button title="Ajouter" onPress={handleAddAnimal} />
       </View>
     </View>
@@ -103,7 +101,7 @@ const styles = StyleSheet.create({
     bottom: 20,
     left: 20,
     right: 20,
-    borderRadius: 20,
+    borderRadius: 10,
   },
 });
 
