@@ -5,6 +5,7 @@ import { selectAnimals, addToFavorites } from '../../store/reducers/animalSlice'
 import MyButton from '../../components/MyButton';
 import TextInput from '../../components/TextInput';/* 
 import {MagnifyingGlassIcon} from '@expo/vector-icons'; */
+import { FontAwesome5 } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 const AnimalListScreen = ({ navigation }) => {
   const animals = useSelector(selectAnimals);
@@ -58,17 +59,25 @@ const AnimalListScreen = ({ navigation }) => {
               justifyContent:"center",
               alignItems:"center",
               flexDirection:"row",
-              backgroundColor:"#6b7280",
+              backgroundColor:"#000",
               flex:1,
               height:200,
               width:160,
               borderRadius:20,
             }}>
               <View style={{
-                display:"flex"
+                display:"flex",
               }}>
                 <Image source={item.image} style={styles.img} />
-                <Text style={{color:"white"}}>{item.name}</Text>
+                <View style={{
+                  paddingTop:8,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}>
+                  <Text style={{color:"white"}}>{item.name}</Text>
+                  <FontAwesome5 name="heart" size={24} color="red" />
+                </View>
               </View>
             </TouchableOpacity>
           );
@@ -79,8 +88,9 @@ const AnimalListScreen = ({ navigation }) => {
 };
 const styles = StyleSheet.create({
   img:{
-    width:130,
-    height:170,
+    width:150,
+    height:150,
+    borderRadius:20,
   }
 })
 /* 
