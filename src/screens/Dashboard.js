@@ -50,11 +50,11 @@ export default function Dashboard({ navigation }) {
           </View>
         </View>
         
-        <View style={styles.logoutButtonContainer}>
+        {/* <View style={styles.logoutButtonContainer}>
           <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
             <Image source={require('../../assets/icones/logout.png')} style={styles.logoutIcon} />
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     </Provider>
   );

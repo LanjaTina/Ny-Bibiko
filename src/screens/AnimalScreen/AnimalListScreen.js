@@ -5,6 +5,7 @@ import { selectAnimals, addToFavorites } from '../../store/reducers/animalSlice'
 import MyButton from '../../components/MyButton';
 import TextInput from '../../components/TextInput';/* 
 import {MagnifyingGlassIcon} from '@expo/vector-icons'; */
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const AnimalListScreen = ({ navigation }) => {
   const animals = useSelector(selectAnimals);
   const dispatch = useDispatch();
@@ -18,13 +19,11 @@ const AnimalListScreen = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground blurRadius={20} source={require("../../../assets/background.jpg")} style={styles.backgroundImage}>
-      <SafeAreaView />
-      <View className="flex-row flex-1 p-4 bg-white rounded-2xl">{/* 
-        <MagnifyingGlassIcon stroke={40} color="gray"/> */}
+     /* <SafeAreaView />
+      <View className="flex-row flex-1 p-4 bg-white rounded-2xl" style={styles.search}>
         <TextInput value="Search" className="ml-2"/>
-      </View>
-      <View style={styles.container}>
+      </View> 
+       <View style={styles.container}>
         <FlatList
           data={animals}
           renderItem={({ item }) => (
@@ -42,11 +41,49 @@ const AnimalListScreen = ({ navigation }) => {
             </View>
           )}
         />
+      </View> */
+      <View style={{ flex:1,marginTop:20}}>
+        <FlatList
+        data={animals}
+        numColumns={2}
+        columnWrapperStyle={{gap:10, paddingHorizontal: 12}}
+        contentContainerStyle={{gap:10,paddingBottom: 20}}
+        keyExtractor={(item,idx) => item.name + idx}
+        showsVerticalScrollIndicator={false}
+        renderItem={({item}) => {
+          return (
+            <TouchableOpacity
+            style ={{
+              display:"flex",
+              justifyContent:"center",
+              alignItems:"center",
+              flexDirection:"row",
+              backgroundColor:"#6b7280",
+              flex:1,
+              height:200,
+              width:160,
+              borderRadius:20,
+            }}>
+              <View style={{
+                display:"flex"
+              }}>
+                <Image source={item.image} style={styles.img} />
+                <Text style={{color:"white"}}>{item.name}</Text>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
+        />
       </View>
-    </ImageBackground>
   );
 };
-
+const styles = StyleSheet.create({
+  img:{
+    width:130,
+    height:170,
+  }
+})
+/* 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -97,7 +134,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
-  },
-});
+  }, 
+});*/
 
 export default AnimalListScreen;
