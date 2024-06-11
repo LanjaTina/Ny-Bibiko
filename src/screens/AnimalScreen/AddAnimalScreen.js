@@ -26,7 +26,7 @@ const AddAnimalScreen = ({ navigation }) => {
       quality: 1,
     });
 
-    if (!result.canceled) {
+    if (!result.cancelled) {
       setImage(result.uri);
     }
   };
@@ -35,9 +35,12 @@ const AddAnimalScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.form}>
         <TouchableOpacity style={styles.imagePicker} onPress={pickImage}>
-          <Ionicons name="add-circle-outline" size={40} color="black" />
+          {image ? (
+            <Image source={{ uri: image }} style={styles.imagePickerIcon} />
+          ) : (
+            <Ionicons name="add-circle-outline" size={60} color="black" />
+          )}
         </TouchableOpacity>
-        {image && <Image source={{ uri: image }} style={styles.image} />}
         <TextInput
           style={styles.input}
           placeholder="Nom"
@@ -56,8 +59,6 @@ const AddAnimalScreen = ({ navigation }) => {
           value={color}
           onChangeText={(text) => setColor(text)}
         />
-      </View>
-      <View style={styles.buttonContainer}>
         <Button title="Ajouter" onPress={handleAddAnimal} />
       </View>
     </View>
@@ -91,19 +92,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: 'white',
   },
-  image: {
-    width: 100,
-    height: 100,
-    borderRadius: 5,
-    marginBottom: 10,
-  },
-  buttonContainer: {
-    width: '100%',
-    position: 'absolute',
-    bottom: 20,
-    left: 20,
-    right: 20,
-    borderRadius: 20,
+  imagePickerIcon: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
   },
 });
 
