@@ -49,10 +49,11 @@ const FavoriteAnimalsScreen = ({ navigation }) => {
           <View style={styles.textContainer}>
             <Text style={styles.name}>{item.name}</Text>
             <FontAwesome5
-              name="heart"
+              name={favorites.some(favAnimal => favAnimal.id === item.id) ? 'heart' : 'heart'}
+              solid={favorites.some(favAnimal => favAnimal.id === item.id)}
               style={[
                 styles.heartIcon,
-                favorites.includes(item) ? { color: 'black' } : { color: '#cd3b25' }
+                favorites.some(favAnimal => favAnimal.id === item.id) ? { color: '#cd3b25' } : { color: '#cd3b25' }
               ]}
               size={20}
               onPress={() => handleAddToFavorites(item)}
