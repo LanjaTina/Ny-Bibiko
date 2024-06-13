@@ -1,8 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 const initialAnimals = [
-  { id: 1, type: 'Chat', name: 'Minou', color: 'Noir', image: require('../../../assets/chien.jpg') },
-  { id: 2, type: 'Chien', name: 'Rex', color: 'Marron', image: require('../../../assets/chien.jpg') },
+  { id: 1, type: 'Chat', name: 'RagDoll', color: 'Noir', image: require('../../../assets/Animal/RagDoll/Ragdoll1.jpeg') },
+  { id: 2, type: 'Chat', name: 'Siamois', color: 'Beige', image: require('../../../assets/Animal/Siamois/Siamois4.jpg') },
+  { id: 3, type: 'Chien', name: 'Berger', color: 'Marron', image: require('../../../assets/Animal/Berger/Berger1.jpg') },
+  { id: 4, type: 'Chien', name: 'Labrador', color: 'Doré', image: require('../../../assets/Animal/Labrador/Labrador1.jpg') },
+  { id: 5, type: 'Oiseau', name: 'Perroquet', color: 'Multicolore', image: require('../../../assets/Animal/Perroquet/Perroquet1.jpg') },
+  { id: 6, type: 'Oiseau', name: 'Aigle', color: 'Verte', image: require('../../../assets/Animal/Aigle/Aigle1.jpg') },
+  { id: 7, type: 'Cheval', name: 'Pur-sang', color: 'Marron', image: require('../../../assets/Animal/Pur-Sang/Pursang1.jpg') },
+  { id: 8, type: 'Cheval', name: 'Shetland', color: 'Noir et blanc', image: require('../../../assets/Animal/Shetland/Shetland1.jpg') },
+  { id: 9, type: 'Lapin', name: 'Angora', color: 'Blanc', image: require('../../../assets/Animal/Angora/Angora1.jpeg') },
+  { id: 10, type: 'Lapin', name: 'Belier', color: 'Marron et blanc', image: require('../../../assets/Animal/Belier/Belier1.jpg') },
+  { id: 11, type: 'Félin', name: 'Lion', color: 'Jaune', image: require('../../../assets/Animal/Lion/Lion1.jpg') },
+  { id: 12, type: 'Félin', name: 'Tigre', color: 'Orange et noir', image: require('../../../assets/Animal/Tigre/Tigre1.jpg') },
 ];
+
+
+
 
 export const animalSlice = createSlice({
   name: 'animals',

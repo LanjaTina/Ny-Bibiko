@@ -118,13 +118,13 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primary,
     width:40,
     height:40,
-    justifyContent: 'center', // Centrer horizontalement
+    justifyContent: 'center', 
     alignItems: 'center',
     borderRadius:100,
-     // Pour rendre le bouton transparent
+     
   },
   iconButton: {
-    backgroundColor: 'transparent', // Pour rendre le bouton transparent
+    backgroundColor: 'transparent', 
   },
   logoutIcon: {
     width: 24,
