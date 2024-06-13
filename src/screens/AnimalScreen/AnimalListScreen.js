@@ -43,7 +43,7 @@ const AnimalListScreen = ({ navigation }) => {
           <Image source={item.image} style={styles.img} />
           <View style={styles.textContainer}>
             <Text style={styles.name}>{item.name}</Text>
-            <FontAwesome5 name="heart" size={20} color="red" onPress={() => handleAddToFavorites(item)} />
+            <FontAwesome5 name="heart" style={styles.heartIcon} size={20} color="#cd3b25" onPress={() => handleAddToFavorites(item)} />
           </View>
         </TouchableOpacity>
 
@@ -80,11 +80,11 @@ const styles = StyleSheet.create({
   },
   cardFlip: {
     width: 160,
-    height: 200,
+    height: 180,
   },
   card: {
     width: 160,
-    height: 200,
+    height: 180,
     borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
@@ -109,23 +109,33 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 20,
-    top:-2
+    top:5
+    
   },
   textContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: 12,
+    paddingTop: 5,
+    paddingHorizontal: 10,
+    
   },
   name: {
-    color: 'black',
-    marginLeft: 5,
+    fontSize:18,
+    marginLeft: 10,
+    fontWeight: 'bold',
+    right:20,
   },
   backText: {
-    fontSize: 16,
+    fontSize: 18,
     textAlign: 'center',
     padding: 10,
+  },
+  heartIcon: {
+    marginRight: 15,
+    left:20,
   },
 });
 
 export default AnimalListScreen;
+
