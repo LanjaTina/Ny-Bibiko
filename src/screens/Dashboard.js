@@ -6,6 +6,9 @@ import AnimalDetailsScreen from './AnimalScreen/AnimalDetailsScreen';
 import FavoriteAnimalsScreen from './AnimalScreen/FavoriteAnimalsScreen';
 import AddAnimalScreen from './AnimalScreen/AddAnimalScreen';
 import EditAnimalScreen from './AnimalScreen/EditAnimalScreen';
+import { Ionicons } from '@expo/vector-icons';
+import {theme,colors} from "../core/theme";
+
 import store from '../store/store';
 import { Text, Button, StyleSheet, View, Image, TouchableOpacity, ImageBackground } from 'react-native';
 const Stack = createStackNavigator();
@@ -21,41 +24,54 @@ export default function Dashboard({ navigation }) {
   return (
     <Provider store={store} >
       <View style={styles.container}>
+      <View style={styles.navigatorContainer}>
         <Stack.Navigator
           screenOptions={{
             headerShown: true,
+            headerTitleAlign: 'center',
             cardStyle: { backgroundColor: '#808080' },
+            headerStyle: {
+              backgroundColor:"#D0993c",
+              borderBottomLeftRadius: 20, // Ajouter border radius en bas à gauche du header
+              borderBottomRightRadius: 20, // Ajouter border radius en bas à droite du header
+           
+            },
+            headerLeft: null,
+            headerTitleStyle: {
+              color: '#FFFFFF',
+
+            },
             containerStyle: {
               backgroundColor: "#0000FF", // Couleur de l'arrière-plan pour toutes les pages
             },
           }}
         >
-          <Stack.Screen name="AnimalList" component={AnimalListScreen} />
-          <Stack.Screen name="AnimalDetails" component={AnimalDetailsScreen} />
-          <Stack.Screen name="FavoriteAnimalsScreen" component={FavoriteAnimalsScreen} />
-          <Stack.Screen name="AddAnimalScreen" component={AddAnimalScreen} />
-          <Stack.Screen name="EditAnimalScreen" component={EditAnimalScreen} />
+          <Stack.Screen name="The Animal" component={AnimalListScreen} />
+          <Stack.Screen name="Details" component={AnimalDetailsScreen} />
+          <Stack.Screen name="Favorites" component={FavoriteAnimalsScreen} />
+          <Stack.Screen name="Add Animal" component={AddAnimalScreen} />
+          <Stack.Screen name="Edit Animal" component={EditAnimalScreen} />
         </Stack.Navigator>
-        
+        </View>
         <View style={styles.test}>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate('AnimalList')} style={styles.logoutButton}>
+            <TouchableOpacity onPress={() => navigation.navigate('The Animal')} style={styles.iconButton}>
               <Image source={require('../../assets/icones/home.png')} style={styles.button} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('AddAnimalScreen')} style={styles.logoutButton}>
+            <TouchableOpacity onPress={() => navigation.navigate('Add Animal')} style={styles.iconButton}>
               <Image source={require('../../assets/icones/add.png')} style={styles.button} />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('FavoriteAnimalsScreen')} style={styles.logoutButton}>
+            <TouchableOpacity onPress={() => navigation.navigate('Favorites')} style={styles.iconButton}>
               <Image source={require('../../assets/icones/heart.png')} style={styles.button} />
             </TouchableOpacity>
           </View>
         </View>
         
-        {/* <View style={styles.logoutButtonContainer}>
-          <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
-            <Image source={require('../../assets/icones/logout.png')} style={styles.logoutIcon} />
+         <View style={styles.logoutButtonContainer}>
+          <TouchableOpacity style={styles.logoutButton}>
+          <Ionicons name="person" size={24} color="white" style={styles.logoutIcon} />
           </TouchableOpacity>
-        </View> */}
+        </View> 
       </View>
     </Provider>
   );
@@ -64,6 +80,12 @@ export default function Dashboard({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex:1
+  },
+  navigatorContainer: {
+    flex: 1,
+    borderBottomLeftRadius: 20, // Ajouter border radius au bas gauche
+    borderBottomRightRadius: 20, // Ajouter border radius au bas droit
+    overflow: 'hidden', // Assurer que le contenu respecte le border radius
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -87,10 +109,21 @@ const styles = StyleSheet.create({
   },
   logoutButtonContainer: {
     position: 'absolute',
-    top: 40,
-    right: 20,
+    top: 35,
+    left: 3,
+    
+
   },
   logoutButton: {
+    backgroundColor: theme.colors.primary,
+    width:40,
+    height:40,
+    justifyContent: 'center', // Centrer horizontalement
+    alignItems: 'center',
+    borderRadius:100,
+     // Pour rendre le bouton transparent
+  },
+  iconButton: {
     backgroundColor: 'transparent', // Pour rendre le bouton transparent
   },
   logoutIcon: {
