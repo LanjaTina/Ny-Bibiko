@@ -1,15 +1,16 @@
-import React from 'react';
-import { View, FlatList, Text, SafeAreaView, StyleSheet, ImageBackground, Image } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, FlatList, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAnimals, addToFavorites } from '../../store/reducers/animalSlice';
-import MyButton from '../../components/MyButton';
-import TextInput from '../../components/TextInput';/* 
-import {MagnifyingGlassIcon} from '@expo/vector-icons'; */
 import { FontAwesome5 } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import CardFlip from 'react-native-card-flip';
+
 const AnimalListScreen = ({ navigation }) => {
   const animals = useSelector(selectAnimals);
   const dispatch = useDispatch();
+
+  const [flippedCard, setFlippedCard] = useState(null);
+  const cardRefs = useRef({});
 
   const handleAnimalPress = (animal) => {
     navigation.navigate('AnimalDetails', { animal });
@@ -19,111 +20,72 @@ const AnimalListScreen = ({ navigation }) => {
     dispatch(addToFavorites(animal));
   };
 
+  const handleCardFlip = (index) => {
+    if (flippedCard !== null && flippedCard !== index) {
+      cardRefs.current[flippedCard].flip();
+    }
+    cardRefs.current[index].flip();
+    setFlippedCard(flippedCard === index ? null : index);
+  };
+
+  const renderItem = ({ item, index }) => (
+    <View style={styles.cardContainer}>
+      <CardFlip
+        style={styles.cardFlip}
+        ref={(card) => (cardRefs.current[index] = card)}
+        duration={1000}
+      >
+        {/* Face avant */}
+        <TouchableOpacity
+          style={[styles.card, styles.cardFront]}
+          onPress={() => handleCardFlip(index)}
+        >
+          <Image source={item.image} style={styles.img} />
+          <View style={styles.textContainer}>
+            <Text style={styles.name}>{item.name}</Text>
+            <FontAwesome5 name="heart" size={20} color="red" onPress={() => handleAddToFavorites(item)} />
+          </View>
+        </TouchableOpacity>
+
+        {/* Face arrière */}
+        <TouchableOpacity
+          style={[styles.card, styles.cardBack]}
+          onPress={() => handleCardFlip(index)}
+        >
+          <Text style={styles.backText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
+        </TouchableOpacity>
+      </CardFlip>
+    </View>
+  );
+
   return (
-     /* <SafeAreaView />
-      <View className="flex-row flex-1 p-4 bg-white rounded-2xl" style={styles.search}>
-        <TextInput value="Search" className="ml-2"/>
-      </View> 
-       <View style={styles.container}>
-        <FlatList
-          data={animals}
-          renderItem={({ item }) => (
-            <View style={styles.cardBox} key={item.id}>
-              <View style={styles.innerContainer}>
-                <Image source={item.image} style={styles.img} />
-                <View style={styles.textContainer}>
-                  <Text style={styles.title}>{item.name}</Text>
-                  <Text style={styles.type}>{item.type}</Text>
-                  <Text style={styles.color}>{item.color}</Text>
-                  <MyButton title="O" onPress={() => handleAddToFavorites(item)} />
-                  <MyButton title="details" onPress={() => handleAnimalPress(item)} />
-                </View>
-              </View>
-            </View>
-          )}
-        />
-      </View> */
-      <View style={{ flex:1,marginTop:20}}>
-       
-        <FlatList
+    <View style={{ flex: 1, marginTop: 20 }}>
+      <FlatList
         data={animals}
         numColumns={2}
-        columnWrapperStyle={{gap:10, paddingHorizontal: 12}}
-        contentContainerStyle={{gap:10,paddingBottom: 20}}
-        keyExtractor={(item,idx) => item.name + idx}
+        columnWrapperStyle={{ gap: 10, paddingHorizontal: 12 }}
+        contentContainerStyle={{ gap: 10, paddingBottom: 20 }}
+        keyExtractor={(item, idx) => item.name + idx}
         showsVerticalScrollIndicator={false}
-        renderItem={({item}) => {
-          return (
-            <TouchableOpacity
-            style ={{
-              display:"flex",
-              justifyContent:"center",
-              alignItems:"center",
-              flexDirection:"row",
-              backgroundColor:"#fff",
-              flex:1,
-              height:200,
-              width:160,
-              borderRadius:20,
-            }}>
-              <View style={{
-                display:"flex",
-              }}>
-                <Image source={item.image} style={styles.img} />
-                <View style={{
-                  paddingTop:8,
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
-                  <Text style={{color:"black" , marginLeft:5}}>{item.name}</Text>
-                  <FontAwesome5 name="heart" size={24} color="red" onPress={() => handleAddToFavorites(item)} />
-                </View>
-              </View>
-            </TouchableOpacity>
-          );
-        }}
-        />
-      </View>
+        renderItem={renderItem}
+      />
+    </View>
   );
 };
+
 const styles = StyleSheet.create({
-  img:{
-    width:150,
-    height:150,
-    borderRadius:20,
-  },
-   container: {
-    flexDirection: 'row',
+  cardContainer: {
+    flex: 1,
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'grey',
-    borderRadius: 8,
-    paddingHorizontal:10,
-    paddingVertical: 5,
-    marginBottom:20,
   },
-  icon: {
-    position: 'absolute',
-    left: 10,
+  cardFlip: {
+    width: 160,
+    height: 200,
   },
-  input: {
-    flex: 1,
-    fontSize: 16,
-    paddingLeft: 35, // Adjust this value to add space for the icon
-  },
-})
-/* 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    position:"relative",
-    paddingHorizontal: 10,
-  },
-  cardBox: {
-    marginBottom: 30,
-    backgroundColor: 'white',
-    borderRadius: 10,
+  card: {
+    width: 160,
+    height: 200,
+    borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -133,38 +95,37 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  innerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center', // Pour centrer verticalement
-    paddingHorizontal: 10,
+  cardFront: {
+    backgroundColor: '#dbdbe3',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cardBack: {
+    backgroundColor: '#f0f0f0',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   img: {
-    width: 120,
-    height: 120,
-    resizeMode: 'cover',
-    borderRadius: 10,
+    width: 150,
+    height: 150,
+    borderRadius: 20,
+    top:-2
   },
   textContainer: {
-    marginLeft: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingTop: 12,
   },
-  title: {
+  name: {
+    color: 'black',
+    marginLeft: 5,
+  },
+  backText: {
     fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 10,
+    textAlign: 'center',
+    padding: 10,
   },
-  type: {
-    fontSize: 14,
-    marginTop: 5,
-  },
-  color: {
-    fontSize: 14,
-    marginTop: 5,
-  },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center',
-  }, 
-});*/
+});
 
 export default AnimalListScreen;
