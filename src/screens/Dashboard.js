@@ -19,11 +19,12 @@ export default function Dashboard({ navigation }) {
   };
 
   return (
-    <Provider store={store}>
+    <Provider store={store} >
       <View style={styles.container}>
         <Stack.Navigator
           screenOptions={{
-            headerShown: false,
+            headerShown: true,
+            cardStyle: { backgroundColor: '#808080' },
             containerStyle: {
               backgroundColor: "#0000FF", // Couleur de l'arrière-plan pour toutes les pages
             },
@@ -62,7 +63,7 @@ export default function Dashboard({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1
   },
   buttonContainer: {
     flexDirection: 'row',

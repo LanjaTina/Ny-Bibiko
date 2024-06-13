@@ -44,6 +44,7 @@ const AnimalListScreen = ({ navigation }) => {
         />
       </View> */
       <View style={{ flex:1,marginTop:20}}>
+       
         <FlatList
         data={animals}
         numColumns={2}
@@ -59,7 +60,7 @@ const AnimalListScreen = ({ navigation }) => {
               justifyContent:"center",
               alignItems:"center",
               flexDirection:"row",
-              backgroundColor:"#000",
+              backgroundColor:"#fff",
               flex:1,
               height:200,
               width:160,
@@ -75,8 +76,8 @@ const AnimalListScreen = ({ navigation }) => {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                 }}>
-                  <Text style={{color:"white"}}>{item.name}</Text>
-                  <FontAwesome5 name="heart" size={24} color="red" />
+                  <Text style={{color:"black" , marginLeft:5}}>{item.name}</Text>
+                  <FontAwesome5 name="heart" size={24} color="red" onPress={() => handleAddToFavorites(item)} />
                 </View>
               </View>
             </TouchableOpacity>
@@ -91,7 +92,26 @@ const styles = StyleSheet.create({
     width:150,
     height:150,
     borderRadius:20,
-  }
+  },
+   container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'grey',
+    borderRadius: 8,
+    paddingHorizontal:10,
+    paddingVertical: 5,
+    marginBottom:20,
+  },
+  icon: {
+    position: 'absolute',
+    left: 10,
+  },
+  input: {
+    flex: 1,
+    fontSize: 16,
+    paddingLeft: 35, // Adjust this value to add space for the icon
+  },
 })
 /* 
 const styles = StyleSheet.create({

@@ -10,12 +10,11 @@ const FavoriteAnimalsScreen = () => {
 
   return (
     <View>
-      <Text>Favorite Animals</Text>
       <FlatList
         data={favorites}
         renderItem={({ item }) => (
-          <View>
-            <Text>{item.name}</Text>
+          <View >
+            <Text style={{color:"white"}}>{item.name}</Text>
           </View>
         )}
         keyExtractor={item => item.id.toString()}
