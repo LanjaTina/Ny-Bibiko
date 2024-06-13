@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { View, FlatList, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAnimals, addToFavorites } from '../../store/reducers/animalSlice';
+import { selectAnimals,selectFavorites, addToFavorites, removeFromFavorites } from '../../store/reducers/animalSlice';
 import { FontAwesome5 } from '@expo/vector-icons';
 import CardFlip from 'react-native-card-flip';
 
 const AnimalListScreen = ({ navigation }) => {
   const animals = useSelector(selectAnimals);
+  const favorites = useSelector(selectFavorites);
   const dispatch = useDispatch();
 
   const [flippedCard, setFlippedCard] = useState(null);
@@ -17,7 +18,11 @@ const AnimalListScreen = ({ navigation }) => {
   };
 
   const handleAddToFavorites = (animal) => {
-    dispatch(addToFavorites(animal));
+    if (favorites.some(favAnimal => favAnimal.id === animal.id)) {
+      dispatch(removeFromFavorites(animal.id));
+    } else {
+      dispatch(addToFavorites(animal));
+    }
   };
 
   const handleCardFlip = (index) => {
@@ -38,17 +43,27 @@ const AnimalListScreen = ({ navigation }) => {
         {/* Face avant */}
         <TouchableOpacity
           style={[styles.card, styles.cardFront]}
+          activeOpacity={1}
           onPress={() => handleCardFlip(index)}
         >
           <Image source={item.image} style={styles.img} />
           <View style={styles.textContainer}>
             <Text style={styles.name}>{item.name}</Text>
-            <FontAwesome5 name="heart" style={styles.heartIcon} size={20} color="#cd3b25" onPress={() => handleAddToFavorites(item)} />
+            <FontAwesome5
+              name="heart"
+              style={[
+                styles.heartIcon,
+                favorites.some(favAnimal => favAnimal.id === item.id) ? { color: 'black' } : { color: '#cd3b25' }
+              ]}
+              size={20}
+              onPress={() => handleAddToFavorites(item)}
+            />
           </View>
         </TouchableOpacity>
 
         {/* Face arrière */}
         <TouchableOpacity
+          activeOpacity={1}
           style={[styles.card, styles.cardBack]}
           onPress={() => handleCardFlip(index)}
         >
@@ -109,8 +124,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     borderRadius: 20,
-    top:5
-    
+    top: 5
   },
   textContainer: {
     flexDirection: 'row',
@@ -118,13 +132,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 5,
     paddingHorizontal: 10,
-    
   },
   name: {
-    fontSize:18,
+    fontSize: 18,
     marginLeft: 10,
     fontWeight: 'bold',
-    right:20,
+    right: 20,
   },
   backText: {
     fontSize: 18,
@@ -133,9 +146,8 @@ const styles = StyleSheet.create({
   },
   heartIcon: {
     marginRight: 15,
-    left:20,
+    left: 20,
   },
 });
 
 export default AnimalListScreen;
-

@@ -51,10 +51,14 @@ export const animalSlice = createSlice({
       state.selectedAnimal = action.payload;
     },
     addToFavorites: (state, action) => {
-      state.favorites.push(action.payload);
+      const animalToAdd = action.payload;
+      if (!state.favorites.find(animal => animal.id === animalToAdd.id)) {
+        state.favorites.push(animalToAdd);
+      }
     },
     removeFromFavorites: (state, action) => {
-      state.favorites = state.favorites.filter(animal => animal.id !== action.payload);
+      const animalToRemoveId = action.payload;
+      state.favorites = state.favorites.filter(animal => animal.id !== animalToRemoveId);
     },
   },
 });
