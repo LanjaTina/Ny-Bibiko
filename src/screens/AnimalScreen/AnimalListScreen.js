@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, FlatList, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, FlatList, Text, StyleSheet, Image, style,TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAnimals, selectFavorites, addToFavorites, removeFromFavorites } from '../../store/reducers/animalSlice';
 import { FontAwesome5 } from '@expo/vector-icons';

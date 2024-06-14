@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, Image, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { removeAnimal } from '../../store/reducers/animalSlice';
+import {theme} from "../../core/theme"
 
 const { width } = Dimensions.get('window');
 
@@ -24,11 +25,18 @@ const AnimalDetailsScreen = ({ route, navigation }) => {
     setActiveIndex(slideIndex);
   };
 
+  const handleThumbnailPress = (index) => {
+    setActiveIndex(index);
+    scrollViewRef.current.scrollTo({ x: index * width, animated: true });
+  };
+
   const images = [animal.image1, animal.image2, animal.image3, animal.image4];
+  const scrollViewRef = React.useRef(null);
 
   return (
     <View style={styles.container}>
       <ScrollView
+        ref={scrollViewRef}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
@@ -41,22 +49,32 @@ const AnimalDetailsScreen = ({ route, navigation }) => {
         ))}
       </ScrollView>
       <View style={styles.indicatorContainer}>
-        {images.map((_, index) => (
-          <View
-            key={index}
-            style={[
-              styles.indicator,
-              index === activeIndex ? styles.activeIndicator : styles.inactiveIndicator,
-            ]}
-          />
+        {images.map((image, index) => (
+          <TouchableOpacity key={index} onPress={() => handleThumbnailPress(index)}>
+            <Image
+              source={image}
+              style={[
+                styles.thumbnail,
+                index === activeIndex ? styles.activeThumbnail : styles.inactiveThumbnail,
+              ]}
+            />
+          </TouchableOpacity>
         ))}
       </View>
-      <Text style={styles.text}>Nom: {animal.name}</Text>
-      <Text style={styles.text}>Type: {animal.type}</Text>
-      <Text style={styles.text}>Couleur: {animal.color}</Text>
-      <Text style={styles.text}>Description: {animal.description}</Text>
-      <Button title="Modifier" onPress={handleEdit} />
-      <Button title="Supprimer" onPress={handleDelete} />
+      <Text style={styles.textName}>{animal.name}</Text>
+      <View style={{
+        backgroundColor:theme.colors.secondary,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+
+      }}>
+        <Text style={styles.text}>Type: {animal.type}</Text>
+        <Text style={styles.text}>Couleur: {animal.color}</Text>
+        <Text style={styles.text}>{animal.description}</Text>
+      </View>
+      
+      {/* <Button title="Modifier" onPress={handleEdit} />
+      <Button title="Supprimer" onPress={handleDelete} /> */}
     </View>
   );
 };
@@ -67,37 +85,46 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   scrollView: {
-    height: 300, // Adjust height as necessary
+    height: 300, 
     width: '100%',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
   },
   image: {
     width: width,
-    height: 300, // Adjust height as necessary
+    height: 250, 
     resizeMode: 'cover',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
   },
   indicatorContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 10,
   },
-  indicator: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
+  thumbnail: {
+    width: 50,
+    height: 50,
     marginHorizontal: 5,
+    borderRadius: 5,
   },
-  activeIndicator: {
-    backgroundColor: '#000',
+  activeThumbnail: {
+    borderWidth: 2,
+    borderColor: '#000',
   },
-  inactiveIndicator: {
-    backgroundColor: '#ccc',
+  inactiveThumbnail: {
+    borderWidth: 2,
+    borderColor: 'transparent',
   },
   text: {
     fontSize: 18,
+    color:"white",
+    marginVertical: 10,
+  },
+  textName: {
+    color:"white",
+    fontWeight:"bold",
+    fontSize: 30,
     marginVertical: 10,
   },
 });

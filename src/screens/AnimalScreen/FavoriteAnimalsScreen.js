@@ -84,7 +84,7 @@ const FavoriteAnimalsScreen = ({ navigation }) => {
         data={favorites}
         numColumns={2}
         columnWrapperStyle={{ gap: 10, paddingHorizontal: 12 }}
-        contentContainerStyle={{ gap: 10, paddingBottom: 20 }}
+        contentContainerStyle={{ gap: 10, paddingBottom: 100 }}
         keyExtractor={(item, idx) => item.name + idx}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem}
