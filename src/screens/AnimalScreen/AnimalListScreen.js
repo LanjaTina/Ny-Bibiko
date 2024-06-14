@@ -49,7 +49,7 @@ const AnimalListScreen = () => {
           activeOpacity={1}
           onPress={() => handleCardFlip(index)}
         >
-          <Image source={item.image} style={styles.img} />
+          <Image source={item.image1} style={styles.img} />
           <View style={styles.textContainer}>
             <Text style={styles.name}>{item.name}</Text>
             <FontAwesome5

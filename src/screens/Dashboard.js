@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Provider } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import AnimalListScreen from './AnimalScreen/AnimalListScreen';
@@ -14,6 +14,7 @@ import { Text, Button, StyleSheet, View, Image, TouchableOpacity, ImageBackgroun
 const Stack = createStackNavigator();
 
 export default function Dashboard({ navigation }) {
+  const [currentScreen, setCurrentScreen] = useState('The Animal');
   const handleLogout = () => {
     navigation.reset({
       index: 0,
@@ -67,11 +68,13 @@ export default function Dashboard({ navigation }) {
           </View>
         </View>
         
-         <View style={styles.logoutButtonContainer}>
-          <TouchableOpacity style={styles.logoutButton}>
-          <Ionicons name="person" size={24} color="white" style={styles.logoutIcon} />
-          </TouchableOpacity>
-        </View> 
+        {currentScreen !== 'Details' && (
+          <View style={styles.logoutButtonContainer}>
+            <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+              <Ionicons name="person" size={24} color="white" style={styles.logoutIcon} />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </Provider>
   );

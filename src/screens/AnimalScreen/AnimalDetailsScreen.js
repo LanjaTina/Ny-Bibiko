@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, Button, Image, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Image, ScrollView, Dimensions } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { removeAnimal } from '../../store/reducers/animalSlice';
+
+const { width } = Dimensions.get('window');
 
 const AnimalDetailsScreen = ({ route, navigation }) => {
   const { animal } = route.params;
@@ -18,7 +20,17 @@ const AnimalDetailsScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image source={animal.image} style={styles.image} />
+      <ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        style={styles.scrollView}
+      >
+        <Image source={animal.image1} style={styles.image} />
+        <Image source={animal.image2} style={styles.image} />
+        <Image source={animal.image3} style={styles.image} />
+        <Image source={animal.image4} style={styles.image} />
+      </ScrollView>
       <Text style={styles.text}>Nom: {animal.name}</Text>
       <Text style={styles.text}>Type: {animal.type}</Text>
       <Text style={styles.text}>Couleur: {animal.color}</Text>
@@ -33,17 +45,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  scrollView: {
+    height: 300, // Adjust height as necessary
+    width: '100%',
   },
   image: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    marginBottom: 20,
+    width: width,
+    height: 300, // Adjust height as necessary
+    resizeMode: 'cover',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   text: {
     fontSize: 18,
-    marginBottom: 10,
+    marginVertical: 10,
   },
 });
 
