@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectFavorites, addToFavorites, removeFromFavorites } from '../../store/reducers/animalSlice';
 import { FontAwesome5 } from '@expo/vector-icons';
 import CardFlip from 'react-native-card-flip';
+import {theme} from "../../core/theme"
 
 const FavoriteAnimalsScreen = ({ navigation }) => {
   const favorites = useSelector(selectFavorites);
@@ -13,7 +14,7 @@ const FavoriteAnimalsScreen = ({ navigation }) => {
   const cardRefs = useRef({});
 
   const handleAnimalPress = (animal) => {
-    navigation.navigate('AnimalDetails', { animal });
+    navigation.navigate('Details', { animal });
   };
 
   const handleAddToFavorites = (animal) => {
@@ -45,7 +46,7 @@ const FavoriteAnimalsScreen = ({ navigation }) => {
           activeOpacity={1}
           onPress={() => handleCardFlip(index)}
         >
-          <Image source={item.image} style={styles.img} />
+          <Image source={item.image1} style={styles.img} />
           <View style={styles.textContainer}>
             <Text style={styles.name}>{item.name}</Text>
             <FontAwesome5
@@ -67,7 +68,11 @@ const FavoriteAnimalsScreen = ({ navigation }) => {
           style={[styles.card, styles.cardBack]}
           onPress={() => handleCardFlip(index)}
         >
-          <Text style={styles.backText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 18 }}>{item.name} :</Text>
+          <Text style={styles.backText}>{item.miniDescription}</Text>
+          <TouchableOpacity style={styles.button} onPress={() => handleAnimalPress(item)}>
+            <Text style={styles.textbutton}>Details</Text>
+          </TouchableOpacity>
         </TouchableOpacity>
       </CardFlip>
     </View>
@@ -147,6 +152,20 @@ const styles = StyleSheet.create({
   heartIcon: {
     marginRight: 15,
     left: 20,
+  },
+  button: {
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  textbutton: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
