@@ -47,7 +47,7 @@ export default function Dashboard({ navigation }) {
           }}
         >
           <Stack.Screen name="The Animal" component={AnimalListScreen} />
-          <Stack.Screen name="Details" component={AnimalDetailsScreen} />
+          <Stack.Screen name="Details" component={AnimalDetailsScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="Favorites" component={FavoriteAnimalsScreen} />
           <Stack.Screen name="Add Animal" component={AddAnimalScreen} />
           <Stack.Screen name="Edit Animal" component={EditAnimalScreen} />

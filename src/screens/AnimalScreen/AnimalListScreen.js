@@ -1,20 +1,23 @@
 import React, { useState, useRef } from 'react';
 import { View, FlatList, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectAnimals,selectFavorites, addToFavorites, removeFromFavorites } from '../../store/reducers/animalSlice';
+import { selectAnimals, selectFavorites, addToFavorites, removeFromFavorites } from '../../store/reducers/animalSlice';
 import { FontAwesome5 } from '@expo/vector-icons';
 import CardFlip from 'react-native-card-flip';
+import { useNavigation } from '@react-navigation/native';
+import {theme} from "../../core/theme"
 
-const AnimalListScreen = ({ navigation }) => {
+const AnimalListScreen = () => {
   const animals = useSelector(selectAnimals);
   const favorites = useSelector(selectFavorites);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const [flippedCard, setFlippedCard] = useState(null);
   const cardRefs = useRef({});
 
   const handleAnimalPress = (animal) => {
-    navigation.navigate('AnimalDetails', { animal });
+    navigation.navigate('Details', { animal });
   };
 
   const handleAddToFavorites = (animal) => {
@@ -68,7 +71,11 @@ const AnimalListScreen = ({ navigation }) => {
           style={[styles.card, styles.cardBack]}
           onPress={() => handleCardFlip(index)}
         >
-          <Text style={styles.backText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 18 }}>{item.name} :</Text>
+          <Text style={styles.backText}>{item.miniDescription}</Text>
+          <TouchableOpacity style={styles.button} onPress={() => handleAnimalPress(item)}>
+            <Text style={styles.textbutton}>Details</Text>
+          </TouchableOpacity>
         </TouchableOpacity>
       </CardFlip>
     </View>
@@ -80,10 +87,11 @@ const AnimalListScreen = ({ navigation }) => {
         data={animals}
         numColumns={2}
         columnWrapperStyle={{ gap: 10, paddingHorizontal: 12 }}
-        contentContainerStyle={{ gap: 10, paddingBottom: 20 }}
+        contentContainerStyle={{ gap: 10, paddingBottom: 100 }}
         keyExtractor={(item, idx) => item.name + idx}
         showsVerticalScrollIndicator={false}
         renderItem={renderItem}
+        onEndReachedThreshold={0.1}
       />
     </View>
   );
@@ -148,6 +156,20 @@ const styles = StyleSheet.create({
   heartIcon: {
     marginRight: 15,
     left: 20,
+  },
+  button: {
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    borderRadius: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  textbutton: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
