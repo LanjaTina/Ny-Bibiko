@@ -82,7 +82,7 @@ const initialAnimals = [
     image3: require('../../../assets/Animal/Pur-Sang/Pursang3.jpg'),
     image4: require('../../../assets/Animal/Pur-Sang/Pursang4.jpg'),
     miniDescription: 'Cheval de course rapide et élégant.',
-    description: 'Le Pur-sang est une race de cheval connue pour sa vitesse, son agilité et sa grâce. Ils sont largement utilisés dans les courses de chevaux et sont appréciés pour leur puissance et leur endurance. Les Pur-sang sont également utilisés comme chevaux de sport et de loisir.'
+    description: 'Le Pur-sang est une race de cheval connue pour sa vitesse, son agilité et sa grâce. Ils sont largement utilisés dans les courses de chevaux et sont appréciés pour leur puissance et leur endurance.'
   },
   { 
     id: 8, 
@@ -118,7 +118,7 @@ const initialAnimals = [
     image3: require('../../../assets/Animal/Belier/Belier3.jpg'),
     image4: require('../../../assets/Animal/Belier/Belier4.jpg'),
     miniDescription: 'Lapin au tempérament doux et aux grandes oreilles.',
-    description: 'Le Belier est une race de lapin caractérisée par ses grandes oreilles tombantes et son tempérament doux. Ils sont populaires comme animaux de compagnie en raison de leur nature calme et affectueuse. Les Beliers sont originaires de France et sont élevés pour leur viande et leur laine.'
+    description: 'Le Belier est une race de lapin caractérisée par ses grandes oreilles tombantes et son tempérament doux. Ils sont populaires comme animaux de compagnie en raison de leur nature calme et affectueuse.'
   },
   { 
     id: 11, 

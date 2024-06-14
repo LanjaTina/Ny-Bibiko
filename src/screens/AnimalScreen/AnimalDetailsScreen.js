@@ -77,6 +77,7 @@ const AnimalDetailsScreen = ({ route, navigation }) => {
       </View>
       <Text style={styles.textName}>{animal.name}</Text>
       <View style={styles.descriptionContainer}>
+      <View style={styles.description}>
         <Text style={styles.textDescription}>{animal.description}</Text>
         <Text style={styles.text}><Text style={{ fontWeight: "bold", textDecorationLine: "underline" }}>Type:</Text> {animal.type}</Text>
         <Text style={styles.text}><Text style={{ fontWeight: "bold", textDecorationLine: "underline" }}>Couleur:</Text> {animal.color}</Text>
@@ -99,6 +100,7 @@ const AnimalDetailsScreen = ({ route, navigation }) => {
             style={styles.heartAnimation}
           />
         )}
+      </View>
       </View>
     </View>
   );
@@ -144,7 +146,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     color: 'white',
-    marginVertical: 10,
     textAlign: 'justify',
     paddingHorizontal: 20,
   },
@@ -153,7 +154,6 @@ const styles = StyleSheet.create({
     color: 'white',
     marginVertical: 10,
     textAlign: 'justify',
-    paddingHorizontal: 20,
   },
   textName: {
     color: 'white',
@@ -167,11 +167,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    marginBottom: '20%',
     width: '100%',
+    height:'47%',
     paddingBottom: 10,
     paddingHorizontal: 20,
     position: 'relative',
+  },
+  description: {
+    marginBottom: '20%',
   },
   heartIcon: {
     position: 'absolute',
